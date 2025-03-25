@@ -18,7 +18,6 @@
             </div>
             <nav class="main-menu">
                 <ul>
-                    <!-- <li class="sale"><a href="#">SALE UPTO 70%</a></li> -->
                     <li><a href="#" data-category="vay">ĐẦM</a></li>
                     <li><a href="#" data-category="ao">ÁO</a></li>
                     <li><a href="#" data-category="quan">QUẦN</a></li>
@@ -151,96 +150,92 @@
     </div>
 </footer>
 
- <script>
-        $(document).ready(function(){
-            // Danh sách sản phẩm mẫu
-            const products = {
-                "vay": [
-                    { img: "./imgs/anhvay1.jpeg", name: "Đầm dáng suông văn sau lưng", price: "450,000đ" },
-                    { img: "./imgs/anhvay2.jpeg", name: "Đầm 2 dây vặn dây ngực, nhún chân", price: "550,000đ" },
-                    { img: "./imgs/anhvay3.jpeg", name: "Đầm cổ tròn ", price: "600,000đ" },
-                    { img: "./imgs/anhvay4.jpeg", name: "Đầm cổ đức ", price: "500,000đ" }
-                ],
-                "ao": [
-                    { img: "./imgs/anhao1.jpeg", name: "Áo trễ vai", price: "295,000đ" },
-                    { img: "./imgs/anhao2.jpeg", name: "Áo len cổ lọ", price: "350,000đ" },
-                    { img: "./imgs/anhao3.jpeg", name: "Áo cổ tim", price: "180,000đ" },
-                    { img: "./imgs/anhao4.jpeg", name: "Áo sơ mi ", price: "320,000đ" }
-                ],
-                "quan": [
-                    { img: "./imgs/quan1.jpeg", name: "Quần short", price: "400,000đ" },
-                    { img: "./imgs/quan2.jpeg", name: "Quần baggy", price: "380,000đ" },
-                    { img: "./imgs/quan3.jpeg", name: "Quần tây", price: "420,000đ" },
-                    { img: "./imgs/quan4.jpeg", name: "Quần ống đứng", price: "250,000đ" }
-                ],
-                "chanvay": [
-                    { img: "./imgs/chanvay1.jpeg", name: "Chân váy ngắn", price: "320,000đ" },
-                    { img: "./imgs/chanvay2.jpeg", name: "Chân váy xòe", price: "280,000đ" },
-                    { img: "./imgs/chanvay3.jpeg", name: "Chân váy xếp ly", price: "350,000đ" },
-                    { img: "./imgs/chanvay4.jpeg", name: "Chân váy midi", price: "300,000đ" }
-                ],
-                "aokhoac": [
-                    { img: "./imgs/aokhoac1.jpeg", name: "Áo khoác dạ", price: "750,000đ" },
-                    { img: "./imgs/aokhoac2.jpeg", name: "Áo khoác tweed dáng xuông", price: "650,000đ" },
-                    { img: "./imgs/aokhoac3.jpeg", name: "Áo khoác cổ tròn", price: "550,000đ" },
-                    { img: "./imgs/aokhoac4.jpeg", name: "Áo khoác da", price: "900,000đ" }
-                ]
-            };
+<script>
+    $(document).ready(function(){
+        const products = {
+            "vay": [
+                { img: "./imgs/anhvay1.jpeg", name: "Đầm dáng suông văn sau lưng", price: "450,000đ" },
+                { img: "./imgs/anhvay2.jpeg", name: "Đầm 2 dây vặn dây ngực, nhún chân", price: "550,000đ" },
+                { img: "./imgs/anhvay3.jpeg", name: "Đầm cổ tròn ", price: "600,000đ" },
+                { img: "./imgs/anhvay4.jpeg", name: "Đầm cổ đức ", price: "500,000đ" }
+            ],
+            "ao": [
+                { img: "./imgs/anhao1.jpeg", name: "Áo trễ vai", price: "295,000đ" },
+                { img: "./imgs/anhao2.jpeg", name: "Áo len cổ lọ", price: "350,000đ" },
+                { img: "./imgs/anhao3.jpeg", name: "Áo cổ tim", price: "180,000đ" },
+                { img: "./imgs/anhao4.jpeg", name: "Áo sơ mi ", price: "320,000đ" }
+            ],
+            "quan": [
+                { img: "./imgs/quan1.jpeg", name: "Quần short", price: "400,000đ" },
+                { img: "./imgs/quan2.jpeg", name: "Quần baggy", price: "380,000đ" },
+                { img: "./imgs/quan3.jpeg", name: "Quần tây", price: "420,000đ" },
+                { img: "./imgs/quan4.jpeg", name: "Quần ống đứng", price: "250,000đ" }
+            ],
+            "chanvay": [
+                { img: "./imgs/chanvay1.jpeg", name: "Chân váy ngắn", price: "320,000đ" },
+                { img: "./imgs/chanvay2.jpeg", name: "Chân váy xòe", price: "280,000đ" },
+                { img: "./imgs/chanvay3.jpeg", name: "Chân váy xếp ly", price: "350,000đ" },
+                { img: "./imgs/chanvay4.jpeg", name: "Chân váy midi", price: "300,000đ" }
+            ],
+            "aokhoac": [
+                { img: "./imgs/aokhoac1.jpeg", name: "Áo khoác dạ", price: "750,000đ" },
+                { img: "./imgs/aokhoac2.jpeg", name: "Áo khoác tweed dáng xuông", price: "650,000đ" },
+                { img: "./imgs/aokhoac3.jpeg", name: "Áo khoác cổ tròn", price: "550,000đ" },
+                { img: "./imgs/aokhoac4.jpeg", name: "Áo khoác da", price: "900,000đ" }
+            ]
+        };
 
-            function filterProducts(category, categoryName) {
-    $(".products").html(""); // Xóa sản phẩm cũ
+        function filterProducts(category, categoryName) {
+            $(".products").html("");
 
-    if (products[category]) {
-        products[category].forEach((product, index) => {
-            let productId = category + (index + 1); // Tạo ID giả định
-            $(".products").append(`
-                <div class="product-item">
-                    <a href="checkout.html?id=${productId}">
-                        <img src="${product.img}" alt="${product.name}">
-                    </a>
-                    <p class="product-name">${product.name}</p>
-                    <p class="price">${product.price}</p>
-                </div>
-            `);
+            if (products[category]) {
+                products[category].forEach((product, index) => {
+                    let productId = category + (index + 1); 
+                    $(".products").append(`
+                        <div class="product-item">
+                            <a href="checkout.html?id=${productId}">
+                                <img src="${product.img}" alt="${product.name}">
+                            </a>
+                            <p class="product-name">${product.name}</p>
+                            <p class="price">${product.price}</p>
+                        </div>
+                    `);
+                });
+            }
+
+        $(".category, .main-menu a").removeClass("active");
+        $(".category." + category).addClass("active");
+        $(".main-menu a[data-category='" + category + "']").addClass("active");
+
+        $(".breadcrumb").show();
+        $(".current-category").text(categoryName);
+    }
+
+
+    $(".category").click(function(){
+        let category = $(this).attr("class").split(" ")[1];
+        let categoryName = $(this).text().trim();
+            filterProducts(category, categoryName);
         });
-    }
 
-    $(".category, .main-menu a").removeClass("active");
-    $(".category." + category).addClass("active");
-    $(".main-menu a[data-category='" + category + "']").addClass("active");
-
-    $(".breadcrumb").show();
-    $(".current-category").text(categoryName);
-}
-
-
-            $(".category").click(function(){
-                let category = $(this).attr("class").split(" ")[1];
-                let categoryName = $(this).text().trim();
+        $(".main-menu a").click(function(e){
+            e.preventDefault();
+            let category = $(this).data("category");
+            let categoryName = $(this).text().trim();
+            if (category) {
                 filterProducts(category, categoryName);
-            });
+            }
 
-            $(".main-menu a").click(function(e){
-                e.preventDefault();
-                let category = $(this).data("category");
-                let categoryName = $(this).text().trim();
-                if (category) {
-                    filterProducts(category, categoryName);
-                }
-
-                $(document).on("click", ".products img", function() {
-    let productLink = $(this).parent("a").attr("href"); // Lấy đường dẫn từ thẻ <a>
-    if (productLink) {
-        window.location.href = productLink; // Chuyển hướng sang trang thanh toán
-    }
+            $(document).on("click", ".products img", function() {
+            let productLink = $(this).parent("a").attr("href"); 
+            if (productLink) {
+                window.location.href = productLink; 
+            }
+        });
+    });
 });
-
-
-});
-
-            });
         
-    </script>
+</script>
   
   
 </body>

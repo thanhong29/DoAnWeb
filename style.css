@@ -78,7 +78,7 @@ main-header {
     margin-right: 8px;
 }
 
-/* Phần tìm kiếm */
+
 .search-section {
     position: relative;
     width: 100%;
@@ -87,7 +87,6 @@ main-header {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    /* margin-top: 100px; Đẩy xuống dưới để tránh bị header che */
 }
 
 .search-bg {
@@ -153,19 +152,19 @@ main-header {
 .search-bar button:hover {
     background-color: #e60000;
 }
-/* Khi ảnh nền thu nhỏ */
+
 .search-section.small {
-    height: 20vh; /* Giảm chiều cao */
+    height: 20vh; 
     transition: height 0.5s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Giữ ô tìm kiếm hiển thị khi thu nhỏ */
+
 .search-section.small .search-box {
     position: absolute;
-    bottom: 10px; /* Đẩy xuống dưới một chút */
+    bottom: 10px; 
     width: 50%;
 }
 .breadcrumb {
