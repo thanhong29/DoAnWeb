@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h2>Trang Thanh Toán</h2>
+    </header>
+
+    <div class="checkout-container">
+        <div class="product-info">
+            <img id="product-image" src="" alt="Sản phẩm">
+            <h3 id="product-name"></h3>
+            <p id="product-price"></p>
+        </div>
+        <button id="pay-button">Thanh toán ngay</button>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            // Lấy ID sản phẩm từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get("id");
+
+            // Danh sách sản phẩm (giống trong index.html)
+            const productData = {
+                "101": { img: "./imgs/anhao1.jpeg", name: "Áo sơ mi trắng", price: "295,000đ" },
+                "102": { img: "./imgs/anhao2.jpeg", name: "Áo len cổ lọ", price: "350,000đ" },
+                "103": { img: "./imgs/anhao3.jpeg", name: "Áo thun basic", price: "180,000đ" },
+                "104": { img: "./imgs/anhao4.jpeg", name: "Áo sơ mi kẻ", price: "320,000đ" }
+            };
+
+            if (productId && productData[productId]) {
+                $("#product-image").attr("src", productData[productId].img);
+                $("#product-name").text(productData[productId].name);
+                $("#product-price").text("Giá: " + productData[productId].price);
+            } else {
+                $(".checkout-container").html("<h3>Sản phẩm không tồn tại!</h3>");
+            }
+
+            // Xử lý khi nhấn nút thanh toán
+            $("#pay-button").click(function(){
+                alert("Cảm ơn bạn đã mua hàng! Hệ thống sẽ xử lý đơn hàng của bạn.");
+                window.location.href = "index.html"; // Quay về trang chủ
+            });
+        });
+    </script>
+
+</body>
+</html>

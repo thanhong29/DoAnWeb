@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục sản phẩm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="./jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="imgs/logo.png" alt="Logo" width="150">
+                </a>
+            </div>
+            <nav class="main-menu">
+                <ul>
+                    <!-- <li class="sale"><a href="#">SALE UPTO 70%</a></li> -->
+                    <li><a href="#" data-category="vay">ĐẦM</a></li>
+                    <li><a href="#" data-category="ao">ÁO</a></li>
+                    <li><a href="#" data-category="quan">QUẦN</a></li>
+                    <li><a href="#" data-category="chanvay">CHÂN VÁY</a></li>
+                    <li><a href="#" data-category="aokhoac">ÁO KHOÁC</a></li>
+                    <li><a href="#">LOOKBOOK</a></li>
+                    <li><a href="#">RESORT 2025</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fa-regular fa-heart"></i> 0</a>
+                <a href="#"><i class="fa-solid fa-bag-shopping"></i> 0</a>
+                <a href="#"><i class="fa-regular fa-user"></i></a>
+            </div>          
+        </div>
+        <div class="bottom-bar">
+            <a href="#"><i class="fa-solid fa-location-dot"></i> Hệ thống cửa hàng</a>
+            <a href="#"><i class="fa-solid fa-truck"></i> Thông tin vận chuyển</a>
+            <a href="#"><i class="fa-solid fa-file-contract"></i> Chính sách tích điểm</a>
+        </div>        
+    </header>
+    <div class="search-section">
+        <img src="imgs/anhnen.jpg" alt="Tìm kiếm sản phẩm" class="search-bg">
+        <div class="search-box">
+            <div class="search-bar">
+                <input type="text" placeholder="Bạn muốn tìm sản phẩm gì?">
+                <button><i class="fas fa-search"></i> Tìm kiếm ngay</button>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb" style="display: none;">
+        <a href="index.html">Trang chủ</a> > <span class="current-category"></span>
+    </div>
+    <div class="categories">
+        <button class="category vay"><p>ĐẦM</p></button>
+        <button class="category ao"><p>ÁO</p></button>
+        <button class="category quan"><p>QUẦN</p></button>
+        <button class="category chanvay"><p>CHÂN VÁY</p></button>
+        <button class="category aokhoac"><p>ÁO KHOÁC</p></button>
+    </div>
+    <div class="products">
+        <div class="row">
+            <a href="checkout.html?id=101"><img src="./imgs/anhao1.jpeg" alt="Áo sơ mi trắng" data-id="101"></a>
+            <a href="checkout.html?id=102"><img src="./imgs/anhao2.jpeg" alt="Áo len cổ lọ" data-id="102"></a>
+            <a href="checkout.html?id=103"><img src="./imgs/anhao3.jpeg" alt="Áo thun basic" data-id="103"></a>
+            <a href="checkout.html?id=104"><img src="./imgs/anhao4.jpeg" alt="Áo sơ mi kẻ" data-id="104"></a>
+        </div>
+        <div class="row">
+            <a href="checkout.html?id=201"><img src="./imgs/anhvay1.jpeg" alt="Đầm hoa nhí"></a>
+            <a href="checkout.html?id=202"><img src="./imgs/anhvay2.jpeg" alt="Đầm body"></a>
+            <a href="checkout.html?id=203"><img src="./imgs/anhvay3.jpeg" alt="Đầm maxi"></a>
+            <a href="checkout.html?id=204"><img src="./imgs/anhvay4.jpeg" alt="Đầm trễ vai"></a>
+        </div>
+        <div class="row">
+            <a href="checkout.html?id=301"><img src="./imgs/aokhoac1.jpeg" alt="Áo khoác dạ"></a>
+            <a href="checkout.html?id=302"><img src="./imgs/aokhoac2.jpeg" alt="Áo khoác bomber"></a>
+            <a href="checkout.html?id=303"><img src="./imgs/aokhoac3.jpeg" alt="Áo khoác len"></a>
+            <a href="checkout.html?id=304"><img src="./imgs/aokhoac4.jpeg" alt="Áo khoác da"></a>
+        </div>
+        <div class="row">
+            <a href="checkout.html?id=401"><img src="./imgs/chanvay1.jpeg" alt="Chân váy dài"></a>
+            <a href="checkout.html?id=402"><img src="./imgs/chanvay2.jpeg" alt="Chân váy xòe"></a>
+            <a href="checkout.html?id=403"><img src="./imgs/chanvay3.jpeg" alt="Chân váy jean"></a>
+            <a href="checkout.html?id=404"><img src="./imgs/chanvay4.jpeg" alt="Chân váy midi"></a>
+        </div>
+        <div class="row">
+            <a href="checkout.html?id=501"><img src="./imgs/quan1.jpeg" alt="Quần jeans"></a>
+            <a href="checkout.html?id=502"><img src="./imgs/quan2.jpeg" alt="Quần baggy"></a>
+            <a href="checkout.html?id=503"><img src="./imgs/quan3.jpeg" alt="Quần tây"></a>
+            <a href="checkout.html?id=504"><img src="./imgs/quan4.jpeg" alt="Quần short"></a>
+        </div>
+    </div>
+    
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>JM DRESS DESIGN</h3>
+            <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Hệ thống cửa hàng</a></li>
+                <li><a href="#">Thông tin tuyển dụng</a></li>
+                <li><a href="#">Liên hệ hợp tác kinh doanh</a></li>
+            </ul>
+            <img src="imgs/tbao.png" alt="Bộ Công Thương">
+        </div>
+
+        <div class="footer-section">
+            <h3>Liên kết với chúng tôi</h3>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
+                <li><a href="mailto:marketing@jm.com.vn"><i class="fas fa-envelope"></i> Email: marketing@jm.com.vn</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Chăm sóc khách hàng</h3>
+            <ul>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+                <li><a href="#">Chính sách tích điểm</a></li>
+                <li><a href="#">Chính sách đổi trả hàng</a></li>
+                <li><a href="#">Chế độ bảo hành trọn đời</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Đăng ký mail nhận ưu đãi từ JM</h3>
+            <form>
+                <input type="email" placeholder="Nhập email của bạn">
+                <button type="submit">GỬI NGAY</button>
+            </form>
+            <p>Bằng cách nhấp vào nút <a href="#">Đăng ký</a>, bạn đồng ý với <a href="#">Chính sách bảo mật</a> và <a href="#">cookie</a> của chúng tôi. Vui lòng <a href="#">Đăng nhập</a> khi bạn đã có tài khoản.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>©2009-2021 JM All Rights Reserved</p>
+        <div class="payment-methods">
+            <p>Chúng tôi nhận thanh toán qua:</p>
+            <img src="imgs/ttoan.png" alt="Payment Methods">
+        </div>
+    </div>
+
+    <div class="company-info">
+        <h3>CÔNG TY CỔ PHẦN THƯƠNG MẠI JDD VIỆT NAM</h3>
+        <p>Trụ sở chính: Ô số 02-NV26, Khu đô thị mới Bắc quốc lộ 32, Thị trấn Trạm Trôi, Huyện Hoài Đức, Hà Nội</p>
+        <p>Giấy chứng nhận Đăng ký Kinh doanh số 0110596586 do Sở Kế hoạch và Đầu tư Thành phố Hà Nội cấp lần đầu ngày 10/01/2024</p>
+    </div>
+</footer>
+
+ <script>
+        $(document).ready(function(){
+            // Danh sách sản phẩm mẫu
+            const products = {
+                "vay": [
+                    { img: "./imgs/anhvay1.jpeg", name: "Đầm dáng suông văn sau lưng", price: "450,000đ" },
+                    { img: "./imgs/anhvay2.jpeg", name: "Đầm 2 dây vặn dây ngực, nhún chân", price: "550,000đ" },
+                    { img: "./imgs/anhvay3.jpeg", name: "Đầm cổ tròn ", price: "600,000đ" },
+                    { img: "./imgs/anhvay4.jpeg", name: "Đầm cổ đức ", price: "500,000đ" }
+                ],
+                "ao": [
+                    { img: "./imgs/anhao1.jpeg", name: "Áo trễ vai", price: "295,000đ" },
+                    { img: "./imgs/anhao2.jpeg", name: "Áo len cổ lọ", price: "350,000đ" },
+                    { img: "./imgs/anhao3.jpeg", name: "Áo cổ tim", price: "180,000đ" },
+                    { img: "./imgs/anhao4.jpeg", name: "Áo sơ mi ", price: "320,000đ" }
+                ],
+                "quan": [
+                    { img: "./imgs/quan1.jpeg", name: "Quần short", price: "400,000đ" },
+                    { img: "./imgs/quan2.jpeg", name: "Quần baggy", price: "380,000đ" },
+                    { img: "./imgs/quan3.jpeg", name: "Quần tây", price: "420,000đ" },
+                    { img: "./imgs/quan4.jpeg", name: "Quần ống đứng", price: "250,000đ" }
+                ],
+                "chanvay": [
+                    { img: "./imgs/chanvay1.jpeg", name: "Chân váy ngắn", price: "320,000đ" },
+                    { img: "./imgs/chanvay2.jpeg", name: "Chân váy xòe", price: "280,000đ" },
+                    { img: "./imgs/chanvay3.jpeg", name: "Chân váy xếp ly", price: "350,000đ" },
+                    { img: "./imgs/chanvay4.jpeg", name: "Chân váy midi", price: "300,000đ" }
+                ],
+                "aokhoac": [
+                    { img: "./imgs/aokhoac1.jpeg", name: "Áo khoác dạ", price: "750,000đ" },
+                    { img: "./imgs/aokhoac2.jpeg", name: "Áo khoác tweed dáng xuông", price: "650,000đ" },
+                    { img: "./imgs/aokhoac3.jpeg", name: "Áo khoác cổ tròn", price: "550,000đ" },
+                    { img: "./imgs/aokhoac4.jpeg", name: "Áo khoác da", price: "900,000đ" }
+                ]
+            };
+
+            function filterProducts(category, categoryName) {
+    $(".products").html(""); // Xóa sản phẩm cũ
+
+    if (products[category]) {
+        products[category].forEach((product, index) => {
+            let productId = category + (index + 1); // Tạo ID giả định
+            $(".products").append(`
+                <div class="product-item">
+                    <a href="checkout.html?id=${productId}">
+                        <img src="${product.img}" alt="${product.name}">
+                    </a>
+                    <p class="product-name">${product.name}</p>
+                    <p class="price">${product.price}</p>
+                </div>
+            `);
+        });
+    }
+
+    $(".category, .main-menu a").removeClass("active");
+    $(".category." + category).addClass("active");
+    $(".main-menu a[data-category='" + category + "']").addClass("active");
+
+    $(".breadcrumb").show();
+    $(".current-category").text(categoryName);
+}
+
+
+            $(".category").click(function(){
+                let category = $(this).attr("class").split(" ")[1];
+                let categoryName = $(this).text().trim();
+                filterProducts(category, categoryName);
+            });
+
+            $(".main-menu a").click(function(e){
+                e.preventDefault();
+                let category = $(this).data("category");
+                let categoryName = $(this).text().trim();
+                if (category) {
+                    filterProducts(category, categoryName);
+                }
+
+                $(document).on("click", ".products img", function() {
+    let productLink = $(this).parent("a").attr("href"); // Lấy đường dẫn từ thẻ <a>
+    if (productLink) {
+        window.location.href = productLink; // Chuyển hướng sang trang thanh toán
+    }
+});
+
+
+});
+
+            });
+        
+    </script>
+  
+  
+</body>
+</html>
