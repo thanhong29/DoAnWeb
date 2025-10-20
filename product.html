@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết sản phẩm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background-color: #fafafa;
+    color: #333;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .product-detail {
+    display: flex;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 30px;
+    flex-wrap: wrap;
+  }
+
+  .product-image {
+    flex: 1 1 400px;
+    border-radius: 12px;
+    object-fit: cover;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .info {
+    flex: 1 1 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .info h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #222;
+  }
+
+  .price {
+    font-size: 22px;
+    color: #e74c3c;
+    font-weight: 600;
+  }
+
+  select, input[type="number"] {
+    width: 120px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 6px;
+    font-size: 15px;
+  }
+
+  #addToCart {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #addToCart:hover {
+    background: #e67e22;
+  }
+
+  #product-description {
+    margin-top: 10px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* MINI CART POPUP */
+  .mini-cart {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 320px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.4s ease;
+  }
+  .mini-cart.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .cart-header {
+    background: #000;
+    color: #fff;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #closeCart {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #cartItems {
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 10px 15px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .cart-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+
+  .cart-item-info {
+    flex: 1;
+  }
+
+  .cart-item-info h5 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-info p {
+    font-size: 13px;
+    color: #666;
+  }
+
+  .cart-item .remove {
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .cart-footer {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    text-align: right;
+  }
+
+  .cart-footer p {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  #viewCartBtn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+  }
+
+  #viewCartBtn:hover {
+    background: #e67e22;
+  }
+
+  @media (max-width: 768px) {
+    .product-detail { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="product-detail">
+  <img id="product-image" src="" alt="Sản phẩm" class="product-image">
+  <div class="info">
+    <h2 id="product-name"></h2>
+    <p class="price" id="product-price"></p>
+    <p id="product-description"></p>
+
+    <label for="size">Chọn size:</label>
+    <select id="size">
+      <option>S</option><option>M</option><option>L</option>
+    </select>
+
+    <label for="quantity">Số lượng:</label>
+    <input type="number" id="quantity" value="1" min="1">
+
+    <button id="addToCart"><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</button>
+  </div>
+</div>
+
+<!-- MINI CART -->
+<div id="miniCart" class="mini-cart">
+  <div class="cart-header">
+    <span>🛍 Giỏ hàng (<span id="cartCount">0</span>)</span>
+    <button id="closeCart">&times;</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="cart-footer">
+    <p>Tổng cộng: <span id="cartTotal">0đ</span></p>
+    <button id="viewCartBtn">XEM GIỎ HÀNG</button>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const slug = params.get("slug");
+
+// Lấy dữ liệu sản phẩm theo slug từ backend
+async function loadProduct() {
+  try {
+    const res = await fetch(`http://localhost:4000/api/v1/client/SanPham/${slug}`);
+    const data = await res.json();
+
+    if (!data.success || !data.product) {
+      document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>Sản phẩm không tồn tại!</h2>";
+      return;
+    }
+
+    const p = data.product;
+    document.getElementById("product-name").textContent = p.name;
+    document.getElementById("product-price").textContent = (Number(p.price) * 1000).toLocaleString("vi-VN") + "đ";
+    document.getElementById("product-image").src = p.image;
+    document.getElementById("product-description").textContent = p.desc;
+
+    // Gắn sự kiện thêm giỏ hàng
+    document.getElementById("addToCart").onclick = () => addToCart(p);
+  } catch (err) {
+    console.error("Lỗi khi load sản phẩm:", err);
+  }
+}
+
+// ====== GIỎ HÀNG ======
+function addToCart(p) {
+  const size = document.getElementById("size").value;
+  const quantity = parseInt(document.getElementById("quantity").value);
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existing = cart.find(item => item.slug === p.slug && item.size === size);
+
+  if (existing) existing.quantity += quantity;
+  else cart.push({
+    slug: p.slug,
+    name: p.name,
+    price: Number(p.price) * 1000,
+    img: p.image,
+    size,
+    quantity
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderMiniCart();
+  showMiniCart();
+}
+
+function renderMiniCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const container = document.getElementById("cartItems");
+  const totalEl = document.getElementById("cartTotal");
+  const countEl = document.getElementById("cartCount");
+  container.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div class="cart-item-info">
+        <h5>${item.name}</h5>
+        <p>Size: ${item.size} | SL: ${item.quantity}</p>
+        <span class="price">${item.price.toLocaleString("vi-VN")}đ</span>
+      </div>
+      <span class="remove" onclick="removeItem(${index})">&times;</span>
+    `;
+    container.appendChild(div);
+  });
+
+  totalEl.textContent = total.toLocaleString("vi-VN") + "đ";
+  countEl.textContent = cart.length;
+}
+
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderMiniCart();
+}
+
+function showMiniCart() {
+  const miniCart = document.getElementById("miniCart");
+  miniCart.classList.add("show");
+  clearTimeout(window.hideMiniCart);
+  window.hideMiniCart = setTimeout(() => miniCart.classList.remove("show"), 6000);
+}
+
+document.getElementById("closeCart").onclick = () =>
+  document.getElementById("miniCart").classList.remove("show");
+
+document.getElementById("viewCartBtn").onclick = () => (window.location.href = "cart.html");
+
+renderMiniCart();
+loadProduct();
+</script>
+</body>
+</html>

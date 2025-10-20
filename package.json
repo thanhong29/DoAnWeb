@@ -1,0 +1,25 @@
+{
+  "name": "doandtdd",
+  "version": "1.0.0",
+  "main": "jquery-3.7.1.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhong29/DoAnDTDD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thanhong29/DoAnDTDD/issues"
+  },
+  "homepage": "https://github.com/thanhong29/DoAnDTDD#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.2"
+  }
+}

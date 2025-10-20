@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chính sách vận chuyển - JM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --max-width: 1100px;
+      --accent: #e74c3c;
+      --muted: #777;
+      --bg-light: #fafafa;
+      --border: #eaeaea;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    /* HEADER */
+    .main-header {
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 20px;
+    }
+
+    .main-menu ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .main-menu a {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .main-menu a:hover {
+      color: var(--accent);
+    }
+
+    .header-icons a {
+      margin-left: 16px;
+      color: #444;
+      font-size: 18px;
+    }
+
+    .bottom-bar {
+      background: var(--bg-light);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .bottom-bar a {
+      color: #333;
+    }
+
+    .bottom-bar i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: var(--max-width);
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .breadcrumb {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb span {
+      margin: 0 6px;
+    }
+
+    h1.page-title {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header .date {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .share-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .social button:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .content h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .content p {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .content ul {
+      margin: 12px 0 20px 20px;
+    }
+
+    .accent {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-img {
+      margin-top: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #eee;
+      padding: 40px 20px;
+      font-size: 15px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      gap: 20px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .footer-section h3 {
+      font-size: 17px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin: 8px 0;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--accent);
+    }
+
+    .footer-section img {
+      width: 120px;
+      margin-top: 10px;
+    }
+
+    .footer-section form {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .footer-section input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .footer-section button {
+      padding: 8px 14px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .footer-section button:hover {
+      background: #c0392b;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      margin-top: 30px;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .payment-methods img {
+      width: 100px;
+      margin-left: 10px;
+    }
+
+    .company-info {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .main-menu ul {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="main-header">
+    <div class="top-bar">
+      <div class="logo">
+        <a href="index.html"><img src="imgs/logo.png" alt="Logo" width="150" /></a>
+      </div>
+
+      <nav class="main-menu">
+        <ul>
+          <li><a href="#">ĐẦM</a></li>
+          <li><a href="#">ÁO</a></li>
+          <li><a href="#">QUẦN</a></li>
+          <li><a href="#">CHÂN VÁY</a></li>
+          <li><a href="#">ÁO KHOÁC</a></li>
+          <li><a href="#">LOOKBOOK</a></li>
+          <li><a href="#">RESORT 2025</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <a href="#"><i class="fa-regular fa-heart"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        <a href="dangnhap.html"><i class="fa-regular fa-user"></i></a>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <a href="stores.html"><i class="fa-solid fa-location-dot"></i> Hệ thống cửa hàng</a>
+      <a href="vanchuyen.html"><i class="fa-solid fa-truck"></i> Thông tin vận chuyển</a>
+      <a href="chinhsach.html"><i class="fa-solid fa-file-contract"></i> Chính sách tích điểm</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="#">Trang chủ</a> <span>/</span>
+      <a href="#">Tin tức</a> <span>/</span>
+      <span>Chính sách tích điểm</span>
+    </div>
+
+    <header>
+      <h1 class="page-title">CHÍNH SÁCH TÍCH ĐIỂM</h1>
+      <div class="date">2021-11-01</div>
+
+      <div class="share-row">
+        <div class="label">Chia sẻ trên:</div>
+        <div class="social">
+          <button title="Twitter"><i class="fab fa-twitter"></i></button>
+          <button title="Facebook"><i class="fab fa-facebook-f"></i></button>
+          <button title="Google"><i class="fab fa-google"></i></button>
+          <button title="Instagram"><i class="fab fa-instagram"></i></button>
+          <button title="YouTube"><i class="fab fa-youtube"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <article class="card content">
+      <h2>Chính sách tích điểm</h2>
+      <p>Từ ngày 01/07/2024, JM áp dụng chương trình tính điểm mới như sau:</p>
+        <h3>1. Điều kiện tham gia tích điểm và các ưu đãi nhận được khi tích điểm
+
+</h3>
+      <p>Tất cả khách hàng khi mua sắm tại các cửa hàng trong hệ thống JM đều được tham gia tích điểm. Số điểm tích lũy tương đương với giá trị thực của hóa đơn. Ưu đãi dành cho các thành viên:</p>
+      
+
+      <div class="hero-img">
+        <img src="imgs/cstd.jpg" alt="JM Dresses" />
+      </div>
+      <h4>2. Điều kiện áp dụng ưu đãi</h4>
+      <p>- Ưu đãi áp dụng theo hạng thẻ được áp dụng trên toàn bộ hệ thống cửa hàng JM</p>
+      <p>- Ưu đãi chỉ áp dụng đối với hàng nguyên giá, không áp dụng đồng thời các chương trình khác</p>
+      <p>- Đối với tài khoản tích điểm trong vòng 12 tháng không phát sinh hóa đơn, số điểm sẽ quy đổi thành 0 VNĐ</p>
+      <p>- Đối với chương trình sinh nhật: áp dụng cho 1 hóa đơn duy nhất tối đa 5 sản phẩm trong tháng sinh nhật, quý khách hàng vui lòng mang theo CĂN CƯỚC CÔNG DÂN  khi thanh toán.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>JM DRESS DESIGN</h3>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Tin tức</a></li>
+          <li><a href="#">Hệ thống cửa hàng</a></li>
+          <li><a href="#">Tuyển dụng</a></li>
+          <li><a href="#">Liên hệ hợp tác</a></li>
+        </ul>
+        <img src="imgs/tbao.png" alt="Bộ Công Thương">
+      </div>
+
+      <div class="footer-section">
+        <h3>Liên kết với chúng tôi</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
+          <li><a href="mailto:marketing@jm.com.vn"><i class="fas fa-envelope"></i> marketing@jm.com.vn</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Chăm sóc khách hàng</h3>
+        <ul>
+          <li><a href="#">Chính sách vận chuyển</a></li>
+          <li><a href="#">Chính sách tích điểm</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Chế độ bảo hành</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Đăng ký nhận ưu đãi</h3>
+        <form>
+          <input type="email" placeholder="Nhập email của bạn">
+          <button type="submit">Gửi</button>
+        </form>
+        <p style="font-size:13px;margin-top:10px;color:#bbb;">
+          Bằng cách đăng ký, bạn đồng ý với <a href="#">Chính sách bảo mật</a> của chúng tôi.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>©2009-2025 JM All Rights Reserved</p>
+      <div class="payment-methods">
+        <p>Chúng tôi chấp nhận:</p>
+        <img src="imgs/ttoan.png" alt="Phương thức thanh toán">
+      </div>
+    </div>
+
+    <div class="company-info">
+      <h3>CÔNG TY CỔ PHẦN THƯƠNG MẠI JDD VIỆT NAM</h3>
+      <p>Ô số 02-NV26, Khu đô thị mới Bắc Quốc lộ 32, Hoài Đức, Hà Nội</p>
+      <p>Giấy phép ĐKKD số 0110596586 cấp ngày 10/01/2024</p>
+    </div>
+  </footer>
+</body>
+</html>

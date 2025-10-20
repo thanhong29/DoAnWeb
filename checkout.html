@@ -1,51 +1,255 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="./jquery-3.7.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background: #f7f7f7;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #222;
+  }
+
+  .checkout-container {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-left: 4px solid #000;
+    padding-left: 10px;
+  }
+
+  .cart-summary {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background: #000;
+    color: #fff;
+  }
+
+  td img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  label {
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+
+  .btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background 0.3s;
+  }
+
+  .btn:hover {
+    background: #e67e22;
+  }
+
+  @media(max-width:768px){
+    table { font-size: 13px; }
+    td img { width: 60px; height: 60px; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h2>Trang Thanh Toán</h2>
-    </header>
+<h1>Thanh toán</h1>
 
-    <div class="checkout-container">
-        <div class="product-info">
-            <img id="product-image" src="" alt="Sản phẩm">
-            <h3 id="product-name"></h3>
-            <p id="product-price"></p>
-        </div>
-        <button id="pay-button">Thanh toán ngay</button>
-    </div>
+<div class="checkout-container">
+  <!-- Thông tin sản phẩm -->
+  <div class="cart-summary">
+    <h2 class="section-title">Sản phẩm trong đơn hàng</h2>
+    <div id="cartSummary"></div>
+  </div>
 
-    <script>
-        $(document).ready(function(){
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get("id");
-            const productData = {
-                "101": { img: "./imgs/anhao1.jpeg", name: "Áo sơ mi trắng", price: "295,000đ" },
-                "102": { img: "./imgs/anhao2.jpeg", name: "Áo len cổ lọ", price: "350,000đ" },
-                "103": { img: "./imgs/anhao3.jpeg", name: "Áo thun basic", price: "180,000đ" },
-                "104": { img: "./imgs/anhao4.jpeg", name: "Áo sơ mi kẻ", price: "320,000đ" }
-            };
+  <!-- Form thông tin người nhận -->
+  <div class="customer-info">
+    <h2 class="section-title">Thông tin người nhận</h2>
+    <form id="checkoutForm">
+      <div>
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" required placeholder="Nhập họ và tên">
+      </div>
 
-            if (productId && productData[productId]) {
-                $("#product-image").attr("src", productData[productId].img);
-                $("#product-name").text(productData[productId].name);
-                $("#product-price").text("Giá: " + productData[productId].price);
-            } else {
-                $(".checkout-container").html("<h3>Sản phẩm không tồn tại!</h3>");
-            }
-            $("#pay-button").click(function(){
-                alert("Cảm ơn bạn đã mua hàng! Hệ thống sẽ xử lý đơn hàng của bạn.");
-                window.location.href = "index.html";
-            });
-        });
-    </script>
+      <div>
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="Nhập số điện thoại">
+      </div>
+
+      <div>
+        <label for="address">Địa chỉ giao hàng:</label>
+        <textarea id="address" required placeholder="Nhập địa chỉ cụ thể"></textarea>
+      </div>
+
+      <div>
+        <label for="payment">Phương thức thanh toán:</label>
+        <select id="payment" required>
+          <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+          <option value="bank">Chuyển khoản ngân hàng</option>
+          <option value="momo">Ví MoMo</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Xác nhận thanh toán</button>
+    </form>
+  </div>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderCartSummary() {
+  const cartDiv = document.getElementById("cartSummary");
+
+  if (cart.length === 0) {
+    cartDiv.innerHTML = `<p>🛒 Giỏ hàng trống. <a href="cart.html" style="color:#e67e22;">Quay lại giỏ hàng</a></p>`;
+    document.querySelector("#checkoutForm").style.display = "none";
+    return;
+  }
+
+  let total = 0;
+  let html = `
+    <table>
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Size</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+          <th>Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  cart.forEach(item => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    html += `
+      <tr>
+        <td><img src="${item.img}" alt="${item.name}"></td>
+        <td>${item.name}</td>
+        <td>${item.size}</td>
+        <td>${item.quantity}</td>
+        <td>${item.price.toLocaleString("vi-VN")}đ</td>
+        <td>${itemTotal.toLocaleString("vi-VN")}đ</td>
+      </tr>
+    `;
+  });
+
+  html += `
+      </tbody>
+    </table>
+    <p class="total">Tổng cộng: ${total.toLocaleString("vi-VN")}đ</p>
+  `;
+
+  cartDiv.innerHTML = html;
+}
+
+// --- Xử lý form thanh toán ---
+document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
+
+  if (!name || !phone || !address) {
+    alert("⚠️ Vui lòng điền đầy đủ thông tin!");
+    return;
+  }
+
+  alert(`🎉 Cảm ơn ${name}!\nĐơn hàng của bạn đã được ghi nhận.\nPhương thức thanh toán: ${payment === "cod" ? "Thanh toán khi nhận hàng" : payment === "bank" ? "Chuyển khoản ngân hàng" : "Ví MoMo"}`);
+
+  // Xóa giỏ hàng sau khi thanh toán
+  localStorage.removeItem("cart");
+
+  // Quay lại trang chủ sau 2 giây
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 2000);
+});
+
+renderCartSummary();
+</script>
 
 </body>
 </html>

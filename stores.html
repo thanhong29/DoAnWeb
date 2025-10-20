@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ thống cửa hàng JM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --accent: #b48b57;
+      --border: #eaeaea;
+      --bg-light: #f6f6f6;
+      --max-width: 1200px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #333;
+      background: #fafafa;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .main-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 14px 24px;
+    }
+
+    .main-menu ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .main-menu a:hover {
+      color: var(--accent);
+    }
+
+    .header-icons a {
+      margin-left: 16px;
+      color: #333;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .header-icons a:hover {
+      color: var(--accent);
+    }
+
+    .bottom-bar {
+      background: var(--bg-light);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .bottom-bar a {
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .bottom-bar a:hover {
+      color: var(--accent);
+    }
+
+    .bottom-bar i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    /* STORE SYSTEM */
+    .store-system {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 40px 20px;
+      gap: 30px;
+      max-width: var(--max-width);
+      margin: auto;
+    }
+
+    .map-container, .store-list {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .map-container {
+      flex: 2;
+      overflow: hidden;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    .store-list {
+      flex: 1;
+      padding: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .store-list h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--accent);
+      padding-left: 8px;
+    }
+
+    .store-list select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .store-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .store-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .store-list strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #ccc;
+      padding: 50px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      max-width: var(--max-width);
+      margin: auto;
+    }
+
+    .footer-section h3 {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-section ul li a {
+      text-decoration: none;
+      color: #ccc;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-section form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .footer-section input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 14px;
+    }
+
+    .footer-section button {
+      padding: 10px 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .footer-section button:hover {
+      background: #a17646;
+    }
+
+    .footer-bottom, .company-info {
+      max-width: var(--max-width);
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .payment-methods img {
+      width: 200px;
+      margin-top: 10px;
+    }
+
+    .company-info h3 {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { flex-direction: column; gap: 10px; }
+      .main-menu ul { flex-wrap: wrap; justify-content: center; }
+      .store-system { flex-direction: column; }
+      .map-container iframe { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="top-bar">
+      <a href="index.html"><img src="imgs/logo.png" alt="Logo" width="140" /></a>
+
+      <nav class="main-menu">
+        <ul>
+          <li><a href="#">ĐẦM</a></li>
+          <li><a href="#">ÁO</a></li>
+          <li><a href="#">QUẦN</a></li>
+          <li><a href="#">CHÂN VÁY</a></li>
+          <li><a href="#">ÁO KHOÁC</a></li>
+          <li><a href="#">LOOKBOOK</a></li>
+          <li><a href="#">RESORT 2025</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <a href="#"><i class="fa-regular fa-heart"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        <a href="dangnhap.html"><i class="fa-regular fa-user"></i></a>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <a href="stores.html"><i class="fa-solid fa-location-dot"></i> Hệ thống cửa hàng</a>
+      <a href="vanchuyen.html"><i class="fa-solid fa-truck"></i> Thông tin vận chuyển</a>
+      <a href="chinhsach.html"><i class="fa-solid fa-file-contract"></i> Chính sách tích điểm</a>
+    </div>
+  </header>
+
+  <!-- STORE SYSTEM -->
+  <section class="store-system">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.242119264173!2d106.70301397486235!3d10.792844989364886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f3f64e04b5b%3A0x1db1f7c1d72e8e86!2s107%20Yersin%2C%20Ph%C3%BA%20C%C6%B0%E1%BB%9Dng%2C%20Th%E1%BB%A7%20D%E1%BA%A7u%20M%E1%BB%99t%2C%20B%C3%ACnh%20D%C6%B0%C6%A1ng!5e0!3m2!1svi!2s!4v1695023571283!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <div class="store-list">
+      <h3>CHỌN TỈNH THÀNH</h3>
+      <select>
+        <option>Cửa hàng</option>
+        <option>Hà Nội</option>
+        <option>Bình Dương</option>
+        <option>Bắc Ninh</option>
+      </select>
+      <ul>
+        <li>
+          <strong>JM Bình Dương</strong>
+          107 Yersin, P. Phú Cường, TP. Thủ Dầu Một, Bình Dương<br>
+          SĐT: 0962777513
+        </li>
+        <li>
+          <strong>JM Bắc Ninh</strong>
+          221 Trần Hưng Đạo, P. Tiền An, TP. Bắc Ninh<br>
+          SĐT: 0964061276
+        </li>
+        <li>
+          <strong>JM Cầu Giấy</strong>
+          233 Cầu Giấy, P. Dịch Vọng, Q. Cầu Giấy, Hà Nội<br>
+          SĐT: 0981431566
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>JM DRESS DESIGN</h3>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Tin tức</a></li>
+          <li><a href="#">Hệ thống cửa hàng</a></li>
+          <li><a href="#">Tuyển dụng</a></li>
+          <li><a href="#">Liên hệ hợp tác</a></li>
+        </ul>
+        <img src="imgs/tbao.png" alt="Bộ Công Thương">
+      </div>
+
+      <div class="footer-section">
+        <h3>Liên kết với chúng tôi</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+          <li><a href="mailto:marketing@jm.com.vn"><i class="fas fa-envelope"></i> marketing@jm.com.vn</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Chăm sóc khách hàng</h3>
+        <ul>
+          <li><a href="vanchuyen.html">Chính sách vận chuyển</a></li>
+          <li><a href="chinhsach.html">Chính sách tích điểm</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Bảo hành trọn đời</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Đăng ký nhận ưu đãi</h3>
+        <form>
+          <input type="email" placeholder="Nhập email của bạn">
+          <button type="submit">GỬI NGAY</button>
+        </form>
+        <p>Bằng cách nhấp <a href="#">Đăng ký</a>, bạn đồng ý với <a href="#">Chính sách bảo mật</a>.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>©2009-2025 JM All Rights Reserved</p>
+      <div class="payment-methods">
+        <p>Chúng tôi nhận thanh toán qua:</p>
+        <img src="imgs/ttoan.png" alt="Payment Methods">
+      </div>
+    </div>
+
+    <div class="company-info">
+      <h3>CÔNG TY CỔ PHẦN THƯƠNG MẠI JDD VIỆT NAM</h3>
+      <p>Ô số 02-NV26, KĐT mới Bắc QL32, TT Trạm Trôi, H. Hoài Đức, Hà Nội</p>
+      <p>Giấy chứng nhận ĐKKD số 0110596586 cấp ngày 10/01/2024</p>
+    </div>
+  </footer>
+</body>
+</html>

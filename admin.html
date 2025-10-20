@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang quản trị - Thêm sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input[type="file"] {
+      border: none;
+    }
+
+    button {
+      width: 200px;
+      background: #000;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    #preview {
+      width: 100px;
+      margin-top: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    hr {
+      margin: 40px 0;
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #f3f3f3;
+    }
+
+    img.product-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .btn-delete {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-delete:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Thêm sản phẩm mới</h1>
+
+    <form id="addForm" enctype="multipart/form-data">
+      <label for="name">Tên sản phẩm:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="price">Giá:</label>
+      <input type="number" id="price" name="price" required>
+
+      <label for="desc">Mô tả:</label>
+      <textarea id="desc" name="desc" required></textarea>
+
+      <label for="image">Ảnh sản phẩm:</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+      <img id="preview" alt="Xem trước ảnh" />
+
+      <button type="submit">Thêm sản phẩm</button>
+    </form>
+
+    <hr>
+
+    <h1>Danh sách sản phẩm</h1>
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Mô tả</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dữ liệu sản phẩm sẽ được render ở đây -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Hiển thị ảnh preview khi chọn file
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('preview');
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+      } else {
+        preview.style.display = 'none';
+      }
+    });
+
+    // Gửi dữ liệu form đến backend
+    const form = document.getElementById('addForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('image', imageInput.files[0]);
+      formData.append('name', document.getElementById('name').value);
+      formData.append('price', document.getElementById('price').value);
+      formData.append('desc', document.getElementById('desc').value);
+
+      try {
+        const res = await fetch('http://localhost:4000/api/v1/client/SanPham/add', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert('✅ Thêm sản phẩm thành công!');
+          form.reset();
+          preview.style.display = 'none';
+          loadProducts();
+        } else {
+          alert('❌ Lỗi: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Lỗi khi gửi dữ liệu:', error);
+        alert('Lỗi khi gửi dữ liệu tới server.');
+      }
+    });
+
+    // Hàm load danh sách sản phẩm
+    async function loadProducts() {
+      try {
+        const res = await fetch('http://localhost:4000/api/v1/client/SanPham/');
+        const data = await res.json();
+
+        const tbody = document.querySelector('#productTable tbody');
+        tbody.innerHTML = '';
+
+        if (data.product && data.product.length > 0) {
+          data.product.forEach((p) => {
+            const row = `
+              <tr>
+                <td><img src="${p.image}" class="product-img" alt="${p.name}" /></td>
+                <td>${p.name}</td>
+                <td>${(Number(p.price) * 1000).toLocaleString('vi-VN')}đ</td>
+                <td>${p.desc}</td>
+                <td>
+                  <button class="btn-delete" onclick="deleteProduct('${p._id}')">Xóa</button>
+                </td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        } else {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Chưa có sản phẩm nào</td></tr>';
+        }
+      } catch (error) {
+        console.error('Lỗi khi load sản phẩm:', error);
+      }
+    }
+
+    // Hàm xóa sản phẩm theo ID
+    async function deleteProduct(id) {
+      if (!confirm('Bạn có chắc muốn xóa sản phẩm này?')) return;
+
+      try {
+        const res = await fetch(`http://localhost:4000/api/v1/client/SanPham/delete/${id}`, {
+          method: 'DELETE'
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert('🗑️ Xóa sản phẩm thành công!');
+          loadProducts();
+        } else {
+          alert('❌ Lỗi khi xóa: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Lỗi khi xóa sản phẩm:', error);
+      }
+    }
+
+    // Gọi khi trang load xong
+    loadProducts();
+  </script>
+</body>
+</html>
